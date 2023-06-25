@@ -1,7 +1,7 @@
-scenario = (50000, 1600, 1.10, 480)
+scenario = (10000, 2000, 1.15, 30 * 12, 1)
 
 
-def calculate_investment(init, input, annual_fee, period):
+def calculate_investment(init, input, annual_fee, period, inflation):
     tax = ((annual_fee) ** (1/12))
 
     inputs = [(init, period)]
@@ -11,7 +11,7 @@ def calculate_investment(init, input, annual_fee, period):
     for i in range(1, period):
         inputs.append(((input * growth), period - i))
         if (i + 1) % 12 == 0:
-            growth *= 1  # 1.05
+            growth *= inflation
 
     result = 0
     total_input = 0
